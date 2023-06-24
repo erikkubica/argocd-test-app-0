@@ -1,0 +1,41 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: mysql-create-user
+  namespace: argocd-test-app-0
+spec:
+  template:
+    spec:
+      containers:
+      - name: mysql-create-user
+        image: mysql:5.7
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-pass
+                key: password
+          - name: MYSQL_APP_DB_NAME
+            valueFrom:
+              secretKeyRef:
+                name: mysql-app-credentials
+                key: dbname
+          - name: MYSQL_APP_USER_NAME
+            valueFrom:
+              secretKeyRef:
+                name: mysql-app-credentials
+                key: username
+          - name: MYSQL_APP_USER_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-app-credentials
+                key: password
+        command:
+          - "bash"
+          - "-c"
+          - |
+            mysql -h mysql -p$MYSQL_ROOT_PASSWORD -e "
+            CREATE DATABASE IF NOT EXISTS $MYSQL_APP_DB_NAME;
+            CREATE USER '$MYSQL_APP_USER_NAME'@'%' IDENTIFIED BY '$MYSQL_APP_USER_PASSWORD';
+            GRANT ALL PRIVILEGES ON app.* TO '$MYSQL_APP_USER_NAME'@'%';"
+      restartPolicy: OnFailure
