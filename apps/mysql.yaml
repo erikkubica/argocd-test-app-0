@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mysql-app
+  namespace: argocd-test-app-0
+spec:
+  project: argocd-test-app-0
+  source:
+    repoURL: https://github.com/erikkubica/argocd-test-app-0.git
+    path: /mysql
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd-test-app-0
+  syncPolicy:
+    automated: {}
