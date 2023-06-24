@@ -7,7 +7,7 @@ spec:
   project: argocd-test-app-0
   source:
     repoURL: https://github.com/erikkubica/argocd-test-app-0.git
-    path: /mysql
+    path: mysql
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
