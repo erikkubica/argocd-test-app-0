@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-test-app-0
+  name: argocd-test-app-0-root
   namespace: argocd-test-app-0
 spec:
-  project: argocd-test-app-0
+  project: argocd-test-app-0-project
   source:
     repoURL: https://github.com/erikkubica/argocd-test-app-0.git
     path: apps
