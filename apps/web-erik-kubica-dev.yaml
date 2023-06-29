@@ -4,7 +4,7 @@ metadata:
   name: web-erik-kubica-dev
   namespace: argocd
 spec:
-  project: web-erik-kubica-dev
+  project: argocd-test-app-0
   source:
     repoURL: https://github.com/erikkubica/argocd-test-app-0.git
     path: web-erik-kubica-dev
