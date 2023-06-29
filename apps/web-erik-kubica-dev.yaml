@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: web-erik-kubica-dev
+  namespace: argocd
+spec:
+  project: web-erik-kubica-dev
+  source:
+    repoURL: https://github.com/erikkubica/argocd-test-app-0.git
+    path: web-erik-kubica-dev
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd-test-app-0
+  syncPolicy:
+    automated: {}
