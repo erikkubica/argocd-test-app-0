@@ -17,6 +17,11 @@ spec:
           image: wordpress:latest
           ports:
             - containerPort: 80
+          env:
+            - name: FORCE_SSL_ADMIN
+              value: "true"
+            - name: FORCE_SSL_LOGIN
+              value: "true"  
           volumeMounts:
             - name: volume
               mountPath: /var/www/html
@@ -80,7 +85,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: public
     cert-manager.io/cluster-issuer: letsencrypt
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     nginx.ingress.kubernetes.io/use-forwarded-headers: "true"
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_set_header X-Forwarded-Proto $scheme;
