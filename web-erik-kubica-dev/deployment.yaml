@@ -103,4 +103,4 @@ spec:
   tls:
     - hosts:
       - erik-kubica.dev
-      secretName: web-erik-kubica-dev
+      secretName: erik-kubica-dev-tls
