@@ -13,18 +13,10 @@ spec:
         app: web-erik-kubica-dev
     spec:
       containers:
-        - name: nginx-proxy
-          image: nginx:latest
-          ports:
-            - containerPort: 80
-            - containerPort: 443
-          volumeMounts:
-            - name: volume
-              mountPath: /var/www/html
-        - name: wordpress
+        - name: web-erik-kubica-dev
           image: wordpress:latest
           ports:
-            - containerPort: 9000
+            - containerPort: 80
           volumeMounts:
             - name: volume
               mountPath: /var/www/html
@@ -80,10 +72,6 @@ spec:
       protocol: TCP
       port: 80
       targetPort: 80
-    - name: https
-      protocol: TCP
-      port: 443
-      targetPort: 443
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -107,7 +95,7 @@ spec:
               service:
                 name: web-erik-kubica-dev
                 port:
-                  number: 443
+                  number: 80
   tls:
     - hosts:
       - erik-kubica.dev
