@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: web-erik-kubica-dev
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: web-erik-kubica-dev
