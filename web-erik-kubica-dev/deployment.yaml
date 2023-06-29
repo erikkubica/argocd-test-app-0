@@ -13,11 +13,18 @@ spec:
         app: web-erik-kubica-dev
     spec:
       containers:
-        - name: web-erik-kubica-dev
-          image: wordpress:latest
+        - name: nginx-proxy
+          image: nginx:latest
           ports:
             - containerPort: 80
             - containerPort: 443
+          volumeMounts:
+            - name: volume
+              mountPath: /var/www/html
+        - name: wordpress
+          image: wordpress:latest
+          ports:
+            - containerPort: 9000
           volumeMounts:
             - name: volume
               mountPath: /var/www/html
